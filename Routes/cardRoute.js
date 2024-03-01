@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Card = require('../Modules/cardModel');
+const Card = require('../Models/cardModel');
 
 router.post('/',async(req,res,next)=>{
     try{

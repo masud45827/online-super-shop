@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const userRoute = require('./Routes/userRoute.js');
 const orderRoute = require('./Routes/orderRoute.js');
 const productRoute = require('./Routes/productRoute.js');
+const cardRoute = require('./Routes/cardRoute.js')
 const reviewRouter = require('./Routes/reviewRoute.js');
 const sellRouter = require('./Routes/sellRoute.js');
 const bodyParser = require('body-parser');
@@ -21,6 +22,7 @@ app.use('/api/order',orderRoute);
 app.use('/api/products',productRoute);
 app.use('/api/review', reviewRouter);
 app.use('/api/sell', sellRouter);
+app.use('/api/card', cardRoute);
 
 app.get('/',(req,res)=>{
     res.send('successful api');

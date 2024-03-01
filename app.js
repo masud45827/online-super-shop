@@ -25,6 +25,10 @@ app.use('/api/sell', sellRouter);
 app.get('/',(req,res)=>{
     res.send('successful api');
 })
+app.post('/',(req,res)=>{
+    res.send('successful');
+    console.log("Alhamdulillah");
+})
 app.listen(8000,()=>{
    console.log('listening port 8000');
 })

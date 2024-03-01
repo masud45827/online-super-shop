@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Sell = require("../Modules/sellModel.js");
+const Sell = require("../Models/sellModel.js");
 
 router.post('', async (req, res)=>{
     const createSell = new Sell(req.body);

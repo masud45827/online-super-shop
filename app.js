@@ -7,11 +7,13 @@ const cardRoute = require('./Routes/cardRoute.js')
 const reviewRouter = require('./Routes/reviewRoute.js');
 const sellRouter = require('./Routes/sellRoute.js');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+
 const app = express();
-mongoose.connect('mongodb+srv://cluster0.fgp9rxb.mongodb.net/' , {
-    dbName: 'onlineSuperShop',
-    user: 'fuadul202',
-    pass: 'Fuadul11235813',
+
+dotenv.config();
+const url = process.env.MONGO_URL;
+mongoose.connect(url , {
 }).then(()=>{
     console.log('Mongodb connected...')
 });

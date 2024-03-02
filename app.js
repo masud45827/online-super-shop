@@ -12,8 +12,16 @@ const dotenv = require('dotenv');
 const app = express();
 
 dotenv.config();
-const url = process.env.MONGO_URL;
-mongoose.connect(url , {
+
+// const url = process.env.MONGO_URL;
+// mongoose.connect(url , {
+//  }).then(()=>{
+//      console.log('Mongodb connected...');
+//  });
+mongoose.connect('mongodb+srv://cluster0.fgp9rxb.mongodb.net/' , {
+    dbName: 'onlineSuperShop',
+    user: 'fuadul202',
+    pass: 'Fuadul11235813',
 }).then(()=>{
     console.log('Mongodb connected...')
 });
@@ -33,6 +41,8 @@ app.post('/',(req,res)=>{
     res.send('successful');
     console.log("Alhamdulillah");
 })
-app.listen(8000,()=>{
+
+const PORT = process.env.PORT;
+app.listen(PORT,()=>{
    console.log('listening port 8000');
 })

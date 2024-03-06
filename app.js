@@ -2,10 +2,16 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyPerser = require('body-parser');
 const dotenv = require('dotenv');
+const cors = require('cors');
 dotenv.config();
 
 const url = process.env.MONGO_URL;
 const app = express();
+
+app.use(cors({
+    origin:'*'
+}));
+
 app.use(bodyPerser.json());
 mongoose.connect(url , {
     dbName: 'onlineSuperShop',

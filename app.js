@@ -7,24 +7,16 @@ const cardRoute = require('./Routes/cardRoute.js')
 const reviewRouter = require('./Routes/reviewRoute.js');
 const sellRouter = require('./Routes/sellRoute.js');
 const bodyParser = require('body-parser');
+const ConnectDb = require('./config/db.js');
+const cors = require('cors');
+
 const dotenv = require('dotenv');
+
 
 const app = express();
 
+app.use(cors());
 dotenv.config();
-
-// const url = process.env.MONGO_URL;
-// mongoose.connect(url , {
-//  }).then(()=>{
-//      console.log('Mongodb connected...');
-//  });
-mongoose.connect('mongodb+srv://cluster0.fgp9rxb.mongodb.net/' , {
-    dbName: 'onlineSuperShop',
-    user: 'fuadul202',
-    pass: 'Fuadul11235813',
-}).then(()=>{
-    console.log('Mongodb connected...')
-});
 
 app.use(bodyParser.json());
 app.use('/api/user',userRoute);
@@ -35,14 +27,27 @@ app.use('/api/sell', sellRouter);
 app.use('/api/card', cardRoute);
 
 app.get('/',(req,res)=>{
-    res.send('successful api');
-})
-app.post('/',(req,res)=>{
-    res.send('successful');
-    console.log("Alhamdulillah");
+    res.send('this is main localhost url');
 })
 
-const PORT = process.env.PORT;
-app.listen(PORT,()=>{
-   console.log('listening port 8000');
+app.all('*',(req,res,next)=>{
+  const error = new Error(`the requested url is invalid : [${req.url}]`)
+  error.status = 400;
+  next(error);
 })
+
+app.use((err,req,res,next)=>{
+    res.status(err.status||500).json({
+        message: err.message,
+    })
+});
+
+const main =async()=>{
+    await ConnectDb();
+    const PORT = process.env.PORT;
+    app.listen(PORT,()=>{
+       console.log('listening port 8000');
+    })
+}
+
+main();

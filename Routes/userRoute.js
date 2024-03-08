@@ -34,6 +34,7 @@ router.get('/login',(req,res)=>{
 
 router.post('/register',upload.single('image'),async(req,res)=>{
     try {
+        console.log(req.body)
         const newUser = new User({
             name: req.body.name,
             email: req.body.email,
@@ -43,7 +44,7 @@ router.post('/register',upload.single('image'),async(req,res)=>{
             district: req.body.district,
             Thana: req.body.Thana,
             address: req.body.address,
-            role: req.body.role,
+            role: 0,
             image: req.file.filename,
         });
         const result = await newUser.save();
